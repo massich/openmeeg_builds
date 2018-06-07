@@ -9,14 +9,18 @@ set matio_dir="C:\conda\envs\matio-cmake\Library\"
 del /q %BUILD_DIR%\*
 cd %BUILD_DIR%
 
-cmake -LAH -G "Visual Studio 14 2015 Win64"  ^
+cmake -LAH -G "NMake Makefiles"  ^
       -DCMAKE_INSTALL_PREFIX=%INSTALL_DIR%   ^
       -DCMAKE_CXX_STANDARD=11                ^
       -DBLA_VENDOR=Intel10_64lp              ^
       -DBLA_STATIC=ON                        ^
       -DCMAKE_PREFIX_PATH=%MY_CONDA_PATH%    ^
+      -DCMAKE_VERBOSE_MAKEFILE=ON            ^
+      --trace-source=Findmatio.cmake         ^
       %SRC_DIR% 
 
-cmake --build . --config %CMAKE_CONFIG% 
+rem cmake --build . --config %CMAKE_CONFIG% 
+rem nmake . VERBOSE=1
+rem nmake install
 
 cd -
