@@ -17,6 +17,7 @@ cmake -LAH -G "NMake Makefiles"  ^
       -DCMAKE_PREFIX_PATH=%MY_CONDA_PATH%    ^
       -DCMAKE_VERBOSE_MAKEFILE=ON            ^
       --trace-source=Findmatio.cmake         ^
+      --trace-expand ^
       %SRC_DIR% 
 
 rem cmake --build . --config %CMAKE_CONFIG% 
