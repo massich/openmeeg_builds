@@ -1,5 +1,5 @@
 set SRC_DIR=F:\openmeeg\
-set BUILD_DIR=E:\openmeeg\build_massich
+set BUILD_DIR=E:\openmeeg\build_win
 set INSTALL_DIR=%BUILD_DIR%\simulate_install_dir
 set MY_CONDA_PATH="C:\conda\envs\matio-cmake\Library\lib\cmake"
 set CMAKE_CONFIG="Release"
@@ -16,12 +16,9 @@ cmake -LAH -G "NMake Makefiles"  ^
       -DBLA_STATIC=ON                        ^
       -DCMAKE_PREFIX_PATH=%MY_CONDA_PATH%    ^
       -DCMAKE_VERBOSE_MAKEFILE=ON            ^
-      --trace-source=Findmatio.cmake         ^
-      --trace-expand ^
       %SRC_DIR% 
 
-rem cmake --build . --config %CMAKE_CONFIG% 
-rem nmake . VERBOSE=1
-rem nmake install
+cmake --build . --config %CMAKE_CONFIG% 
+cmake --build . --target install
 
 cd -
