@@ -3,8 +3,13 @@ set BUILD_DIR=E:\openmeeg\build_win
 set INSTALL_DIR=%BUILD_DIR%\simulate_install_dir
 set MY_CONDA_PATH="C:\conda\envs\matio-cmake\Library\lib\cmake"
 set CMAKE_CONFIG="Release"
-set VCOMP_PATH=" C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.OpenMP\vcomp140.dll"
+set VCOMP_PATH="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\x64\Microsoft.VC140.OpenMP\vcomp140.dll"
 set matio_dir="C:\conda\envs\matio-cmake\Library\"
+
+
+rem "C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2018.0.124\windows\bin\compilervars_arch.bat" intel64 vs2015
+rem "C:\Program Files (x86)\IntelSWTools\compilers_and_libraries_2018\windows\mkl\bin\mklvars" intel64 ilp64 vs2015
+rem conda activate matio-cmake
 
 del /q %BUILD_DIR%\*
 cd %BUILD_DIR%
@@ -23,6 +28,6 @@ cmake -LAH -G "NMake Makefiles"  ^
       %SRC_DIR%                     
 
 cmake --build . --config %CMAKE_CONFIG% 
-cmake --build . --target install
+cmake --build . --target install --config %CMAKE_CONFIG% 
 
 cd ..
