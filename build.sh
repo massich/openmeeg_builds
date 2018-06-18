@@ -6,7 +6,7 @@ cd $BUILD_DIR
 rm $BUILD_DIR/* -Rf
 cmake $SRC_DIR -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR  \
                -DCMAKE_CXX_STANDARD=11 \
-               -DBLA_VENDOR=Intel10_64lp \
+               -DBLA_VENDOR=OpenBLAS \
 
 make VERBOSE=1
 make install
