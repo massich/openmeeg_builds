@@ -19,6 +19,7 @@ cmake -G "NMake Makefiles"  ^
       -DCMAKE_CXX_STANDARD=11                ^
       -DBLA_VENDOR=OpenBLAS                  ^
       -DENABLE_PYTHON=ON                     ^
+      -DCMAKE_BUILD_TYPE=%CMAKE_CONFIG%      ^
       -DBLA_STATIC=OFF                       ^
       -DCMAKE_PREFIX_PATH=%MY_CONDA_PATH%    ^
       -DCMAKE_VERBOSE_MAKEFILE=ON            ^
