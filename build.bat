@@ -1,5 +1,5 @@
 set SRC_DIR=F:\openmeeg\
-set BUILD_DIR=E:\openmeeg\build_conda_openmeeg
+set BUILD_DIR=E:\openmeeg\build_conda_openmeeg2
 set INSTALL_DIR=%BUILD_DIR%\simulate_install_dir
 set MY_CONDA_PATH="C:\conda\envs\matio-cmake\Library\lib\cmake"
 set CMAKE_CONFIG="Release"
@@ -24,9 +24,12 @@ cmake -G "NMake Makefiles"  ^
       -DCMAKE_PREFIX_PATH=%MY_CONDA_PATH%    ^
       -DCMAKE_VERBOSE_MAKEFILE=ON            ^
       -DBUILD_DOCUMENTATION=OFF              ^
+      -DENABLE_PACKAGING:BOOL=OFF            ^
+      --trace-source=wrapping/src/CMakeLists.txt ^
+      --trace-expand ^
       %SRC_DIR%                     
 
-cmake --build . --config %CMAKE_CONFIG% 
-cmake --build . --target install --config %CMAKE_CONFIG% 
+rem cmake --build . --config %CMAKE_CONFIG% 
+rem cmake --build . --target install --config %CMAKE_CONFIG% 
 
 cd ..
