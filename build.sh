@@ -22,5 +22,6 @@ cmake $SRC_DIR -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR  \
 
 make VERBOSE=1
 make install
+ctest .
 
 cd -
