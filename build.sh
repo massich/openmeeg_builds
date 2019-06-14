@@ -1,5 +1,5 @@
-PR_NUM=373
-BUILD_ID=2
+PR_NUM=375
+BUILD_ID=0
 
 SRC_DIR=/home/sik/code/openmeeg/
 BUILD_DIR=/home/sik/Workspace/openmeeg/build_${BUILD_ID}_pr_${PR_NUM}
@@ -14,7 +14,7 @@ USE_VTK=ON
 # BUILD_DOCUMENTATION=ON
 
 mkdir -p $BUILD_DIR && cd $BUILD_DIR
-rm $BUILD_DIR/* -Rf
+# rm $BUILD_DIR/* -Rf
 cmake $SRC_DIR -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR  \
                -DCMAKE_CXX_STANDARD=11 \
                -DBLA_VENDOR=$BACKEND \
@@ -25,7 +25,6 @@ cmake $SRC_DIR -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR  \
 
 make VERBOSE=1
 make install
-# ctest -V . > /tmp/openmeeg_ctest_build_${BUILD_ID}_pr_${PR_NUM}.log
 ctest . > /tmp/openmeeg_ctest_build_${BUILD_ID}_pr_${PR_NUM}.log &
 tail -f /tmp/openmeeg_ctest_build_${BUILD_ID}_pr_${PR_NUM}.log
 
