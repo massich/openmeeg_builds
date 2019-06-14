@@ -1,4 +1,4 @@
-PR_NUM=375
+PR_NUM=377
 BUILD_ID=0
 
 SRC_DIR=/home/sik/code/openmeeg/
@@ -25,7 +25,8 @@ cmake $SRC_DIR -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR  \
 
 make VERBOSE=1
 make install
-ctest . > /tmp/openmeeg_ctest_build_${BUILD_ID}_pr_${PR_NUM}.log &
-tail -f /tmp/openmeeg_ctest_build_${BUILD_ID}_pr_${PR_NUM}.log
+# ctest . > /tmp/openmeeg_ctest_build_${BUILD_ID}_pr_${PR_NUM}.log &
+# tail -f /tmp/openmeeg_ctest_build_${BUILD_ID}_pr_${PR_NUM}.log
+ctest -V -R HM-Head1
 
 # cd -

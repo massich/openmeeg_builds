@@ -1,5 +1,5 @@
 set SRC_DIR=F:\openmeeg\
-set BUILD_DIR=E:\openmeeg\build_pr_375_win
+set BUILD_DIR=E:\openmeeg\build_pr_377
 set INSTALL_DIR=%BUILD_DIR%\simulate_install_dir
 set MY_CONDA_PATH="C:\conda\envs\matio-cmake\Library\lib\cmake"
 set CMAKE_CONFIG="Release"
