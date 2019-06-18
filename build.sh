@@ -27,6 +27,7 @@ make VERBOSE=1
 make install
 # ctest . > /tmp/openmeeg_ctest_build_${BUILD_ID}_pr_${PR_NUM}.log &
 # tail -f /tmp/openmeeg_ctest_build_${BUILD_ID}_pr_${PR_NUM}.log
-ctest -V -R HM-Head1
+ctest -R HM
+ctest -V -R CLEAN-TESTS
 
 # cd -
