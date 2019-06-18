@@ -17,10 +17,6 @@ USER travis
 #   - ubuntu-toolchain-r-test
 RUN sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 
-RUN sudo apt-get update
-
-ENV PATH /usr/local/clang-7.0.0/bin:$PATH
-
 # From '.travis.yml':
 # packages:
 #   - libopenblas-dev
@@ -39,4 +35,18 @@ RUN sudo apt-get install -y libc6:i386 libncurses5:i386 libstdc++6:i386
 RUN sudo apt-get install -y lcov
 RUN sudo apt-get install binutils-2.26
 RUN export PATH=/usr/lib/binutils-2.26/bin:${PATH}
+
+# Install cmake v
+RUN sudo apt-get purge cmake
+ENV CMAKE_VERSION=3.10.1
+RUN curl -fsSkL https://raw.githubusercontent.com/openmeeg/ci-utils/master/travis/install_cmake.sh > x.sh && source ./x.sh
+
+# Setup Travis variables
+WORKDIR /home/travis
+ENV BACKEND=OpenBLAS
+ENV USE_VTK=ON
+ENV ENABLE_PYTHON=ON
+ENV ANALYSE=ON
+ENV ENABLE_COVERAGE=ON
+ENV BUILD_DOCUMENTATION=ON
 
