@@ -16,6 +16,7 @@ USER travis
 # sources:
 #   - ubuntu-toolchain-r-test
 RUN sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+RUN sudo apt-get update
 
 # From '.travis.yml':
 # packages:
@@ -34,12 +35,15 @@ RUN sudo apt-get update
 RUN sudo apt-get install -y libc6:i386 libncurses5:i386 libstdc++6:i386
 RUN sudo apt-get install -y lcov
 RUN sudo apt-get install binutils-2.26
-RUN export PATH=/usr/lib/binutils-2.26/bin:${PATH}
+ENV PATH="/usr/lib/binutils-2.26/bin:${PATH}"
 
-# Install cmake v
+# Install cmake v3.10.1
+WORKDIR /home/travis/
 RUN sudo apt-get purge cmake
-ENV CMAKE_VERSION=3.10.1
-RUN curl -fsSkL https://raw.githubusercontent.com/openmeeg/ci-utils/master/travis/install_cmake.sh > x.sh && source ./x.sh
+RUN git clone https://github.com/astropy/ci-helpers.git
+RUN /bin/bash ci-helpers/travis/setup_conda_linux.sh
+ENV PATH="/home/travis/miniconda/bin:${PATH}"
+RUN conda install cmake=3.12.2 --yes
 
 # Setup Travis variables
 WORKDIR /home/travis
@@ -50,3 +54,27 @@ ENV ANALYSE=ON
 ENV ENABLE_COVERAGE=ON
 ENV BUILD_DOCUMENTATION=ON
 
+# Missing things for debugging using LLDB
+RUN sudo add-apt-repository ppa:jonathonf/llvm
+RUN sudo apt-get update
+RUN sudo apt-get install clang-3.8 lldb-3.8
+RUN sudo update-alternatives --install /usr/bin/lldb-server lldb-server /usr/bin/lldb-server-3.8 100
+
+
+# Set up HOST variables to access local repo from the container
+RUN mkdir -p /home/travis/code/openmeeg
+RUN mkdir -p /home/travis/openmeeg_build/
+RUN conda install hdf5
+RUN sudo apt-get install -y libmatio2 libmatio-dev libvtk5-dev
+WORKDIR /home/travis/openmeeg_build/
+# ENV SRC_DIR=/home/travis/code/openmeeg/
+# RUN cmake $SRC_DIR -DCMAKE_CXX_STANDARD=11 \
+#                    -DBLA_VENDOR=$BACKEND \
+#                    -DCMAKE_BUILD_TYPE=Debug \
+#                    -DUSE_VTK=$USE_VTK \
+#                    -DCMAKE_C_FLAGS_DEBUG="-g -O0" \
+#                    -DCMAKE_CXX_FLAGS_DEBUG="-g -O0" 
+
+# ADD /home/sik/code/openmeeg /home/travis/code/openmeeg
+
+# docker run -it --privileged -v /home/sik/code/openmeeg:/home/travis/code/openmeeg replicate_368 /bin/bash
