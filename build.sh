@@ -1,8 +1,8 @@
 PR_NUM=373
 BUILD_ID=0
 
-SRC_DIR=/home/sik/code/openmeeg/
-BUILD_DIR=/home/sik/Workspace/openmeeg/build_${BUILD_ID}_pr_${PR_NUM}
+export SRC_DIR=/home/travis/code/openmeeg/
+export BUILD_DIR=/home/travis/openmeeg_build/
 INSTALL_DIR=$BUILD_DIR/simulate_install_dir
 
 
