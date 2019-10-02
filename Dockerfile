@@ -6,9 +6,10 @@
 # Environment analyze:
 # * https://travis-ci.org/travis-ci-tester/travis-trusty-env/builds/279929194
 
-FROM travisci/ci-garnet:packer-1515445631-7dfb2e1
+# FROM travisci/ci-garnet:packer-1515445631-7dfb2e1
+FROM travisci/ci-ubuntu-1804:packer-1566551110-e45a2919
 
-MAINTAINER Joan Massich <mailsik@gmail.com>
+LABEL maintainer="Joan Massich <mailsik@gmail.com>"
 
 USER travis
 
@@ -26,24 +27,20 @@ RUN sudo apt-get update
 #   - python-numpy
 #   - doxygen
 #   - graphviz
-RUN sudo apt-get -y install libopenblas-dev liblapacke-dev swig python-numpy doxygen graphviz
+#   - libmatio4
+#   - libmatio-dev
+#   - libvtk6-dev
+RUN sudo apt-get -y install libopenblas-dev liblapacke-dev swig python-numpy doxygen graphviz libmatio4 libmatio-dev libvtk6-dev
+RUN sudo apt-get -y install cmake
 
 # From '.travis.yml':
 # before_install:
-RUN sudo dpkg --add-architecture i386
-RUN sudo apt-get update
-RUN sudo apt-get install -y libc6:i386 libncurses5:i386 libstdc++6:i386
-RUN sudo apt-get install -y lcov
-RUN sudo apt-get install binutils-2.26
-ENV PATH="/usr/lib/binutils-2.26/bin:${PATH}"
-
-# Install cmake v3.10.1
-WORKDIR /home/travis/
-RUN sudo apt-get purge cmake
-RUN git clone https://github.com/astropy/ci-helpers.git
-RUN /bin/bash ci-helpers/travis/setup_conda_linux.sh
-ENV PATH="/home/travis/miniconda/bin:${PATH}"
-RUN conda install cmake=3.12.2 --yes
+# RUN sudo dpkg --add-architecture i386
+# RUN sudo apt-get update
+# RUN sudo apt-get install -y libc6:i386 libncurses5:i386 libstdc++6:i386
+# RUN sudo apt-get install -y lcov
+# RUN sudo apt-get install binutils-2.26
+# ENV PATH="/usr/lib/binutils-2.26/bin:${PATH}"
 
 # Setup Travis variables
 WORKDIR /home/travis
@@ -54,18 +51,17 @@ ENV ANALYSE=ON
 ENV ENABLE_COVERAGE=ON
 ENV BUILD_DOCUMENTATION=ON
 
-# Missing things for debugging using LLDB
-RUN sudo add-apt-repository ppa:jonathonf/llvm
-RUN sudo apt-get update
-RUN sudo apt-get install clang-3.8 lldb-3.8
-RUN sudo update-alternatives --install /usr/bin/lldb-server lldb-server /usr/bin/lldb-server-3.8 100
+# # Missing things for debugging using LLDB
+# RUN sudo add-apt-repository ppa:jonathonf/llvm
+# RUN sudo apt-get update
+# RUN sudo apt-get install clang-3.8 lldb-3.8
+# RUN sudo update-alternatives --install /usr/bin/lldb-server lldb-server /usr/bin/lldb-server-3.8 100
 
 
 # Set up HOST variables to access local repo from the container
 RUN mkdir -p /home/travis/code/openmeeg
 RUN mkdir -p /home/travis/openmeeg_build/
-RUN conda install hdf5
-RUN sudo apt-get install -y libmatio2 libmatio-dev libvtk5-dev
+# RUN conda install hdf5
 WORKDIR /home/travis/openmeeg_build/
 # ENV SRC_DIR=/home/travis/code/openmeeg/
 # RUN cmake $SRC_DIR -DCMAKE_CXX_STANDARD=11 \
