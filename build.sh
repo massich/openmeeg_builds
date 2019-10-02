@@ -1,13 +1,15 @@
 # Travis second build ends up with the following command
 # cmake ..  -DBLA_VENDOR=OpenBLAS -DENABLE_COVERAGE=ON -DENABLE_PYTHON=ON -DUSE_VTK=ON -DBUILD_DOCUMENTATION=ON
+# cmake $SRC_DIR -DBLA_VENDOR=OpenBLAS -DENABLE_COVERAGE=OFF -DENABLE_PYTHON=ON -DUSE_VTK=ON -DBUILD_DOCUMENTATION=ON -DCMAKE_CXX_STANDARD=11
+#
 PR_NUM=fix_travis
 BUILD_ID=0
 
-export SRC_DIR=/home/travis/code/openmeeg/
-export BUILD_DIR=/home/travis/openmeeg_build/build_$BUILD_ID_pr_$PR_NUM
+# export SRC_DIR=/home/travis/code/openmeeg/
+# export BUILD_DIR=/home/travis/openmeeg_build/build_$BUILD_ID_pr_$PR_NUM
 
-# export SRC_DIR=/home/sik/code/openmeeg/
-# export BUILD_DIR=/home/sik/Workspace/openmeeg/build_pr_368
+export SRC_DIR=/home/sik/code/openmeeg/
+export BUILD_DIR=/home/sik/Workspace/openmeeg/build_$BUILD_ID_pr_$PR_NUM
 INSTALL_DIR=$BUILD_DIR/simulate_install_dir
 
 
