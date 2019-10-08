@@ -69,7 +69,7 @@ WORKDIR /home/travis/openmeeg_build/
 #                    -DCMAKE_BUILD_TYPE=Debug \
 #                    -DUSE_VTK=$USE_VTK \
 #                    -DCMAKE_C_FLAGS_DEBUG="-g -O0" \
-#                    -DCMAKE_CXX_FLAGS_DEBUG="-g -O0" 
+#                    -DCMAKE_CXX_FLAGS_DEBUG="-g -O0"
 
 # ADD /home/sik/code/openmeeg /home/travis/code/openmeeg
 
