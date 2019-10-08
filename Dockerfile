@@ -30,7 +30,7 @@ RUN sudo apt-get update
 #   - libmatio4
 #   - libmatio-dev
 #   - libvtk6-dev
-RUN sudo apt-get -y install libopenblas-dev liblapacke-dev swig python-numpy doxygen graphviz libmatio4 libmatio-dev libvtk6-dev
+RUN sudo apt-get -y install libopenblas-dev liblapacke-dev swig python3-numpy doxygen graphviz libmatio4 libmatio-dev libvtk6-dev
 RUN sudo apt-get -y install cmake
 
 # From '.travis.yml':
@@ -49,7 +49,7 @@ ENV USE_VTK=ON
 ENV ENABLE_PYTHON=ON
 ENV ANALYSE=ON
 ENV ENABLE_COVERAGE=ON
-ENV BUILD_DOCUMENTATION=ON
+ENV BUILD_DOCUMENTATION=OFF
 
 # # Missing things for debugging using LLDB
 # RUN sudo add-apt-repository ppa:jonathonf/llvm

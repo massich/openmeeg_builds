@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  travis-full-dependencies-debug:
+    build: .
+      volumes:
+        - /home/sik/code/openmeeg/:/home/travis/code/openmeeg
+      container_name: travis-full-dep
